@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838242850038",
+    "project_id": "gymbuddy-4baca",
+    "storage_bucket": "gymbuddy-4baca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838242850038:android:7242f8c4a20212d47c48d7",
+        "android_client_info": {
+          "package_name": "com.example.my_trainer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfxqp6uAQ_L6dCP9r1QxtuXzfppsxqc5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
