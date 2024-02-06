@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_trainer/components/formfield.dart';
@@ -46,6 +47,8 @@ class _SigninState extends State<RegisterPage> {
            InkWell(
              onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>SigninScreen()));
+
+
 
             },
 

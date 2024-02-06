@@ -45,6 +45,8 @@ class _SigninState extends State<SigninScreen> {
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
 
+
+
             },
 
 
