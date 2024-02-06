@@ -421,6 +421,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  toast_w:
+    dependency: "direct main"
+    description:
+      name: toast_w
+      sha256: bde06aa698b55a51cf93ef5eef277938700482b30c82fd4c6caebb0c10dae0a6
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   typed_data:
     dependency: transitive
     description:

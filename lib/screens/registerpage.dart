@@ -3,6 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_trainer/Functions/emailValidator.dart';
+import 'package:my_trainer/Functions/signinfirebase.dart';
+import 'package:my_trainer/Functions/signupfirebase.dart';
+import 'package:my_trainer/Functions/textvalidator.dart';
 import 'package:my_trainer/components/formfield.dart';
 import 'package:my_trainer/components/loginButton.dart';
 import 'package:my_trainer/components/logoImage.dart';
@@ -17,6 +21,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _SigninState extends State<RegisterPage> {
+
+  TextEditingController emailcontroller= TextEditingController();
+  TextEditingController passwordcontroller= TextEditingController();
+  TextEditingController usernamecontroller= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,13 +44,17 @@ class _SigninState extends State<RegisterPage> {
                   color: Color.fromRGBO(255, 0, 0, 1)),
             )
           ,const SizedBox(height: 50,)
-            ,textFormField("Email", 'email', false,Icons.mail_outline)
+            ,textFormField("Email", 'email', false,Icons.mail_outline,emailcontroller)
           ,const SizedBox(height: 20)
-          ,textFormField("Username", 'username', false,Icons.person)
+          ,textFormField("Username", 'username', false,Icons.person,usernamecontroller)
           ,const SizedBox(height: 20)
-          ,textFormField("Password", 'password', true,Icons.lock_outline_rounded)
+          ,textFormField("Password", 'password', true,Icons.lock_outline_rounded,passwordcontroller)
           ,const SizedBox(height: 80)
-          ,loginSignupBTN("Login",(){}),
+          ,loginSignupBTN("Register",(){
+            
+            signinBtnPress(emailcontroller.text,passwordcontroller.text);
+            
+            }),
           const SizedBox(height: 20,),
            InkWell(
              onTap: (){
@@ -63,5 +75,12 @@ class _SigninState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+}
+signinBtnPress(String email,password,)async {
+ if(email_Valid(email)&&text_Valid(password)){
+    await signupUser(email, password);
+
+
   }
 }

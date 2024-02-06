@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_trainer/Functions/emailvalidator.dart';
+import 'package:my_trainer/Functions/signinfirebase.dart';
+import 'package:my_trainer/Functions/textvalidator.dart';
 import 'package:my_trainer/components/formfield.dart';
 import 'package:my_trainer/components/loginButton.dart';
 import 'package:my_trainer/components/logoImage.dart';
@@ -14,8 +17,10 @@ class SigninScreen extends StatefulWidget {
   @override
   State<SigninScreen> createState() => _SigninState();
 }
-final _formkey= GlobalKey<FormState>();
+
 class _SigninState extends State<SigninScreen> {
+  TextEditingController emailcontroller =TextEditingController();
+  TextEditingController passwordcontroller =TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,16 +40,18 @@ class _SigninState extends State<SigninScreen> {
                   color: Color.fromRGBO(255, 0, 0, 1)),
             )
           ,const SizedBox(height: 50,)
-          ,textFormField("Username", 'username', false,Icons.person)
+          ,textFormField("Email", 'Email', false,Icons.mail,emailcontroller)
           ,const SizedBox(height: 20)
-          ,textFormField("Password", 'password', true,Icons.lock_outline_rounded)
+          ,textFormField("Password", 'password', true,Icons.lock_outline_rounded,passwordcontroller)
           ,const SizedBox(height: 80)
-          ,loginSignupBTN("Login",(){}),
+          ,loginSignupBTN("Login",(){
+            signinBtnPress(emailcontroller.text,passwordcontroller.text);
+             }),
           const SizedBox(height: 20,),
            InkWell(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
-
+            
 
 
             },
@@ -62,4 +69,14 @@ class _SigninState extends State<SigninScreen> {
       ),
     );
   }
+}
+
+signinBtnPress(String email,String password,)async {
+  if(email_Valid(email)&&text_Valid(password)){
+    await signinUser(email, password);
+    return true;
+
+
+  }
+  return false;
 }
