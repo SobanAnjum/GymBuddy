@@ -5,17 +5,17 @@ import 'package:get/get.dart';
 import 'package:my_trainer/components/formfield.dart';
 import 'package:my_trainer/components/loginButton.dart';
 import 'package:my_trainer/components/logoImage.dart';
-import 'package:my_trainer/screens/registerpage.dart';
+import 'package:my_trainer/screens/signin.dart';
 import 'package:my_trainer/screens/splash.dart';
 
-class SigninScreen extends StatefulWidget {
-  const SigninScreen({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<SigninScreen> createState() => _SigninState();
+  State<RegisterPage> createState() => _SigninState();
 }
-final _formkey= GlobalKey<FormState>();
-class _SigninState extends State<SigninScreen> {
+
+class _SigninState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,13 +28,15 @@ class _SigninState extends State<SigninScreen> {
             Center(child: logoImage()),
             const SizedBox(height: 10,)
             ,const Text(
-              "Login",
+              "Register",
               style: TextStyle(
                   fontFamily: 'Lemonmilk',
                   fontSize: 35,
                   color: Color.fromRGBO(255, 0, 0, 1)),
             )
           ,const SizedBox(height: 50,)
+            ,textFormField("Email", 'email', false,Icons.mail_outline)
+          ,const SizedBox(height: 20)
           ,textFormField("Username", 'username', false,Icons.person)
           ,const SizedBox(height: 20)
           ,textFormField("Password", 'password', true,Icons.lock_outline_rounded)
@@ -42,15 +44,14 @@ class _SigninState extends State<SigninScreen> {
           ,loginSignupBTN("Login",(){}),
           const SizedBox(height: 20,),
            InkWell(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
+             onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>SigninScreen()));
 
             },
 
 
 
-
-            child: const Text("Don't have an Account? Click here to Register"),
+            child: const Text("Already have an Account? Click here to Login"),
           
 
           )
