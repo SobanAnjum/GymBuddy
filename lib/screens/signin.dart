@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
 import 'package:get/get.dart';
 import 'package:my_trainer/Functions/emailvalidator.dart';
 import 'package:my_trainer/Functions/signinfirebase.dart';
@@ -29,10 +30,9 @@ class _SigninState extends State<SigninScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 150,),
-         
             Center(child: logoImage()),
-            const SizedBox(height: 10,)
-            ,const Text(
+            const SizedBox(height: 10,),
+            const Text(
               "Login",
               style: TextStyle(
                   fontFamily: 'Lemonmilk',
@@ -45,25 +45,19 @@ class _SigninState extends State<SigninScreen> {
           ,textFormField("Password", 'password', true,Icons.lock_outline_rounded,passwordcontroller)
           ,const SizedBox(height: 80)
           ,loginSignupBTN("Login",(){
+            
+
             signinBtnPress(emailcontroller.text,passwordcontroller.text);
+            emailcontroller.clear();
+            passwordcontroller.clear();
              }),
           const SizedBox(height: 20,),
            InkWell(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
-            
-
-
             },
-
-
-
-
             child: const Text("Don't have an Account? Click here to Register"),
-          
-
           )
-        
           ],
         ),
       ),
@@ -71,9 +65,9 @@ class _SigninState extends State<SigninScreen> {
   }
 }
 
-signinBtnPress(String email,String password,)async {
+signinBtnPress(String email,String password, ) {
   if(email_Valid(email)&&text_Valid(password)){
-    await signinUser(email, password);
+     signinUser(email, password);
     return true;
 
 

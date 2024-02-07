@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
 import 'package:get/get.dart';
 import 'package:my_trainer/Functions/emailValidator.dart';
 import 'package:my_trainer/Functions/signinfirebase.dart';
@@ -10,6 +11,7 @@ import 'package:my_trainer/Functions/textvalidator.dart';
 import 'package:my_trainer/components/formfield.dart';
 import 'package:my_trainer/components/loginButton.dart';
 import 'package:my_trainer/components/logoImage.dart';
+import 'package:my_trainer/screens/homepage.dart';
 import 'package:my_trainer/screens/signin.dart';
 import 'package:my_trainer/screens/splash.dart';
 
@@ -22,9 +24,22 @@ class RegisterPage extends StatefulWidget {
 
 class _SigninState extends State<RegisterPage> {
 
+
   TextEditingController emailcontroller= TextEditingController();
   TextEditingController passwordcontroller= TextEditingController();
   TextEditingController usernamecontroller= TextEditingController();
+
+
+//   checkUser(){
+//   final user = FirebaseAuth.instance.currentUser;
+//   if(user!=null){
+//     Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+
+//   }
+//   else{
+//     Navigator.push(context, MaterialPageRoute(builder: (context)=>SigninScreen()));
+//   }
+// }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,14 +66,15 @@ class _SigninState extends State<RegisterPage> {
           ,textFormField("Password", 'password', true,Icons.lock_outline_rounded,passwordcontroller)
           ,const SizedBox(height: 80)
           ,loginSignupBTN("Register",(){
-            
-            signinBtnPress(emailcontroller.text,passwordcontroller.text);
+
+            signinBtnPress(emailcontroller.text,passwordcontroller.text,context);
             
             }),
           const SizedBox(height: 20,),
            InkWell(
              onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>SigninScreen()));
+              
 
 
 
@@ -77,10 +93,25 @@ class _SigninState extends State<RegisterPage> {
     );
   }
 }
-signinBtnPress(String email,password,)async {
+signinBtnPress(String email,password,BuildContext currentcontext) {
  if(email_Valid(email)&&text_Valid(password)){
-    await signupUser(email, password);
-
+    signupUser(email, password,currentcontext);
 
   }
+  else if(!email_Valid(email)&&!text_Valid(password)){
+    FlutterToastr.show("Invalid Email and Short Password", currentcontext);
+
+  }
+  else if(email_Valid(email)&&!text_Valid(password)){
+    FlutterToastr.show("Password very short", currentcontext);
+
+  }
+  else if(!email_Valid(email)&&text_Valid(password)){
+    FlutterToastr.show("Invalid Email", currentcontext);
+
+  }
+  else{
+    FlutterToastr.show("Some Error Occured", currentcontext);
+  }
+  
 }

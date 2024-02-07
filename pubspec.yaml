@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^4.15.3
   get: ^4.6.6
   toast_w: ^0.0.5
+  flutter_toastr: ^1.0.3
 
 dev_dependencies:
   flutter_test:

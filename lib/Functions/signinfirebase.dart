@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
 
-signinUser(String email, String password){
+signinUser(String email, String password)async{
 
   try{
-    FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    
   }
   on FirebaseAuthException catch(e){
   if (e.code == 'user-not-found') {
