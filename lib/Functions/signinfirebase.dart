@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toastr/flutter_toastr.dart';
+import 'package:my_trainer/screens/homepage.dart';
 
 signinUser(String email, String password,BuildContext currentcontext)async{
 
   try{
-await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) => Navigator.pushReplacement(currentcontext, MaterialPageRoute(builder: (currentcontext)=>const HomePage())));
     
   }
   on FirebaseAuthException catch(e){

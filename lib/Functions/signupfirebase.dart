@@ -13,7 +13,7 @@ try {
   ).then((value){ if(userCredential?.user!=null){
     
   }
-    Navigator.push(currentcontext, MaterialPageRoute(builder: (context)=>const HomePage()));
+    Navigator.pushReplacement(currentcontext, MaterialPageRoute(builder: (context)=>const HomePage()));
     
     }
     );
