@@ -47,7 +47,7 @@ class _SigninState extends State<SigninScreen> {
           ,loginSignupBTN("Login",(){
             
 
-            signinBtnPress(emailcontroller.text,passwordcontroller.text);
+            signinBtnPress(emailcontroller.text,passwordcontroller.text,context);
             emailcontroller.clear();
             passwordcontroller.clear();
              }),
@@ -65,12 +65,27 @@ class _SigninState extends State<SigninScreen> {
   }
 }
 
-signinBtnPress(String email,String password, ) {
+signinBtnPress(String email,String password, BuildContext currentcontext) {
   if(email_Valid(email)&&text_Valid(password)){
-     signinUser(email, password);
+     signinUser(email, password,currentcontext);
     return true;
 
 
+  }else if(!email_Valid(email)&&!text_Valid(password)){
+    FlutterToastr.show("Invalid Email and Short Password", currentcontext);
+
   }
-  return false;
+  else if(email_Valid(email)&&!text_Valid(password)){
+    FlutterToastr.show("Password very short", currentcontext);
+
+  }
+  else if(!email_Valid(email)&&text_Valid(password)){
+    FlutterToastr.show("Invalid Email", currentcontext);
+
+  }
+  else{
+    FlutterToastr.show("Some Error Occured", currentcontext);
+      return false;
+  }
+
 }
