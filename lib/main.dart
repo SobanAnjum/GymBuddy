@@ -1,15 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:my_trainer/firebase_options.dart';
 import 'package:my_trainer/screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyAfxqp6uAQ_L6dCP9r1QxtuXzfppsxqc5o",
-          appId: "1:838242850038:android:7242f8c4a20212d47c48d7",
-          messagingSenderId: '838242850038',
-          projectId: 'gymbuddy-4baca'));
+      options:DefaultFirebaseOptions.currentPlatform,
+          );
   runApp(const MyApp());
 }
 
