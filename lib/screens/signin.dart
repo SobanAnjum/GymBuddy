@@ -29,7 +29,7 @@ class _SigninState extends State<SigninScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 150,),
+            const SizedBox(height: 100,),
             Center(child: logoImage()),
             const SizedBox(height: 10,),
             const Text(

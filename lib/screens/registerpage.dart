@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toastr/flutter_toastr.dart';
@@ -47,7 +48,7 @@ class _SigninState extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 150,),
+            const SizedBox(height: 100,),
          
             Center(child: logoImage()),
             const SizedBox(height: 10,)
@@ -68,16 +69,26 @@ class _SigninState extends State<RegisterPage> {
           ,loginSignupBTN("Register",(){
 
             signinBtnPress(emailcontroller.text,passwordcontroller.text,context);
-            
+            final parentCollection = FirebaseFirestore.instance.collection("Users").doc(usernamecontroller.text);
+          parentCollection.collection("PersonalInformation").doc("infoData").set(
+            {
+              "firstname":"N/A",
+              "lastname":"N/A",
+              "DOB":"N/A",
+              "isRegistered":false,
+              "BMR":"N/A",
+              "height":"N/A",
+              "weight":"N/A",
+              "gender":"N/A",
+              "email":"N/A",
+            }
+
+           );
             }),
           const SizedBox(height: 20,),
            InkWell(
              onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>SigninScreen()));
-              
-
-
-
             },
 
 
@@ -85,8 +96,7 @@ class _SigninState extends State<RegisterPage> {
             child: const Text("Already have an Account? Click here to Login"),
           
 
-          )
-        
+            )
           ],
         ),
       ),
