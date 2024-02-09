@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_trainer/Functions/signOut.dart';
+import 'package:my_trainer/screens/onBoardingScreen.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,24 +22,9 @@ class _HomePageState extends State<HomePage> {
         children: [
           InkWell(
   child: Text("Check Document Existence"),
-  onTap: () async {
-final parentCollection = FirebaseFirestore.instance.collection("Users");
-final  userDocument = parentCollection.doc("username");
-userDocument.set({}); // Reference to the document within the "Users" collection
-final  personalInfoDocument = userDocument.collection("PersonalInformation").doc("infoData");
-    personalInfoDocument.set({
-  "firstname": "N/A",
-  "lastname": "N/A",
-  "DOB": "N/A",
-  "isRegistered": false,
-  "BMR": "N/A",
-  "height": "N/A",
-  "weight": "N/A",
-  "gender": "N/A",
-  "email": "email",
-});
-  },
-)
+  onTap: ()  {
+Navigator.push(context, MaterialPageRoute(builder: (context) => OnBoardingScreen(),));
+  })
 
 
            
