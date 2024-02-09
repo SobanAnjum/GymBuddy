@@ -62,28 +62,13 @@ class _SigninState extends State<RegisterPage> {
           ,const SizedBox(height: 50,)
             ,textFormField("Email", 'email', false,Icons.mail_outline,emailcontroller)
           ,const SizedBox(height: 20)
-          ,textFormField("Username", 'username', false,Icons.person,usernamecontroller)
+          ,textFormField("Display Name", 'Display Name', false,Icons.person,usernamecontroller)
           ,const SizedBox(height: 20)
           ,textFormField("Password", 'password', true,Icons.lock_outline_rounded,passwordcontroller)
           ,const SizedBox(height: 80)
           ,loginSignupBTN("Register",(){
 
-            signinBtnPress(emailcontroller.text,passwordcontroller.text,context);
-            final parentCollection = FirebaseFirestore.instance.collection("Users").doc(usernamecontroller.text);
-          parentCollection.collection("PersonalInformation").doc("infoData").set(
-            {
-              "firstname":"N/A",
-              "lastname":"N/A",
-              "DOB":"N/A",
-              "isRegistered":false,
-              "BMR":"N/A",
-              "height":"N/A",
-              "weight":"N/A",
-              "gender":"N/A",
-              "email":"N/A",
-            }
-
-           );
+            signinBtnPress(emailcontroller.text,passwordcontroller.text,context,usernamecontroller.text);
             }),
           const SizedBox(height: 20,),
            InkWell(
@@ -103,9 +88,10 @@ class _SigninState extends State<RegisterPage> {
     );
   }
 }
-signinBtnPress(String email,password,BuildContext currentcontext) {
- if(email_Valid(email)&&text_Valid(password)){
-    signupUser(email, password,currentcontext);
+signinBtnPress(String email,password,BuildContext currentcontext,String username) {
+
+ if(email_Valid(email)&&text_Valid(password)&&text_Valid(username)){
+    signupUser(email, password,username,currentcontext);
 
   }
   else if(!email_Valid(email)&&!text_Valid(password)){
@@ -119,6 +105,9 @@ signinBtnPress(String email,password,BuildContext currentcontext) {
   else if(!email_Valid(email)&&text_Valid(password)){
     FlutterToastr.show("Invalid Email", currentcontext);
 
+  }
+  else if(!text_Valid(username)){
+    FlutterToastr.show("Username too short", currentcontext);
   }
   else{
     FlutterToastr.show("Some Error Occured", currentcontext);

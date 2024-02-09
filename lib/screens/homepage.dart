@@ -20,17 +20,29 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           InkWell(
-            onTap:(){
-              FirebaseFirestore.instance.collection("Users").doc("Sobananjum0").set(
-              {
-                "name":"Soban"
+  child: Text("Check Document Existence"),
+  onTap: () async {
+final parentCollection = FirebaseFirestore.instance.collection("Users");
+final  userDocument = parentCollection.doc("username");
+userDocument.set({}); // Reference to the document within the "Users" collection
+final  personalInfoDocument = userDocument.collection("PersonalInformation").doc("infoData");
+    personalInfoDocument.set({
+  "firstname": "N/A",
+  "lastname": "N/A",
+  "DOB": "N/A",
+  "isRegistered": false,
+  "BMR": "N/A",
+  "height": "N/A",
+  "weight": "N/A",
+  "gender": "N/A",
+  "email": "email",
+});
+  },
+)
 
-              }
-              );
 
-            } ,
-            child: const Text("Upload to Database"),
-          )
+           
+          
         ],
 
       ),
