@@ -45,11 +45,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: Container(child: Center(child: Text("Let's Get Started",style:TextStyle(color: Color.fromRGBO(255, 0, 0, 1),fontFamily: "poppins",fontWeight:FontWeight.bold, fontSize: 35,),textAlign:TextAlign.center ,))),
             ),
             Container( child: Center( child: Text("Introduce Yourself",style:TextStyle(fontFamily: "poppins",fontWeight: FontWeight.normal ,fontSize: 20,),),)),
-            SizedBox(height: 20,),
+            SizedBox(height: 80,),
             textField("First Name", fName,TextInputType.text),
-            SizedBox(height: 15,),
+            SizedBox(height: 30,),
             textField("Last Name", lName,TextInputType.text),
-            SizedBox(height: 15,),
+            SizedBox(height: 30,),
             // textField("Age", age,TextInputType.number),
             // SizedBox(height: 20,),
             Container(
@@ -126,7 +126,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         )
 
         ),
-        SizedBox(height: 10,),
+        SizedBox(height: 30,),
          Row(
            children: [
              StatefulBuilder(
@@ -171,11 +171,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
            ],
            
          ),
-         SizedBox(height: 15,),
-         textField("Weight in KG's", weight,TextInputType.number),
-         SizedBox(height: 15,),
-         textField("Height in Inches", height,TextInputType.number),
          SizedBox(height: 30,),
+         textField("Weight in KG's", weight,TextInputType.number),
+         SizedBox(height: 30,),
+         textField("Height in Inches", height,TextInputType.number),
+         SizedBox(height: 60,),
          loginSignupBTN("Proceed", (){
 
 

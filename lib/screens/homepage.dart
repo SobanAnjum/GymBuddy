@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
           InkWell(
   child: Text("Check Document Existence"),
   onTap: ()  {
-//Navigator.push(context, MaterialPageRoute(builder: (context) => OnBoardingScreen(),));
+Navigator.push(context, MaterialPageRoute(builder: (context) => OnBoardingScreen(),));
 
 
   })
