@@ -61,15 +61,24 @@ class _DatePickerCustomState extends State<DatePickerCustom> {
               ),
             ),
             InkWell(
-              onTap: (){
-                showDatePicker(context: context, firstDate: DateTime(1950), lastDate: DateTime.now();
+              onTap: ()async{
+                DateTime? picked=await showDatePicker(context: context, firstDate: DateTime(1950), lastDate: DateTime.now(), );
+                if(picked!=null){
+                  setState(() {
+                  day=picked.day.toString();
+                  month=picked.month.toString();
+                  year=picked.year.toString();
+                }
+
+                
+                );}
               },
               child: 
               Container(
                 width: 80,
                 height: 60,
-                decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 1),borderRadius: BorderRadius.circular(5)),
-                child: Center(child: Text("Date Picker",style: TextStyle(color: Color.fromRGBO(255, 0, 0, 1), fontFamily: "poppins",fontSize: 15, fontWeight: FontWeight.bold,),textAlign: TextAlign.center,)),
+                decoration: BoxDecoration(color: const Color.fromRGBO(255, 255, 255, 1),borderRadius: BorderRadius.circular(5)),
+                child: const Center(child: Text("Date Picker",style: TextStyle(color: Color.fromRGBO(255, 0, 0, 1), fontFamily: "poppins",fontSize: 15, fontWeight: FontWeight.bold,),textAlign: TextAlign.center,)),
               ),
             )
           

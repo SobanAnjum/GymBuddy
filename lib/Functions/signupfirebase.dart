@@ -30,9 +30,9 @@ var  personalInfoDocument = userDocument.collection("PersonalInformation").doc("
   "lastname": "N/A",
   "DOB": "N/A",
   "isRegistered": false,
-  "BMR": "N/A",
-  "height": "N/A",
-  "weight": "N/A",
+  "BMR": 0.0,
+  "height": 0.0,
+  "weight": 0.0,
   "gender": "N/A",
   "email": email,
 });
