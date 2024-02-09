@@ -61,6 +61,9 @@ class _DatePickerCustomState extends State<DatePickerCustom> {
               ),
             ),
             InkWell(
+              onTap: (){
+                showDatePicker(context: context, firstDate: DateTime(1950), lastDate: DateTime.now();
+              },
               child: 
               Container(
                 width: 80,
