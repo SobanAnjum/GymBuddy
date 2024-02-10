@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_trainer/Functions/signOut.dart';
+import 'package:my_trainer/screens/bmr.dart';
 import 'package:my_trainer/screens/onBoardingScreen.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           InkWell(
   child: Text("Check Document Existence"),
   onTap: ()  {
-Navigator.push(context, MaterialPageRoute(builder: (context) => OnBoardingScreen(),));
+Navigator.push(context, MaterialPageRoute(builder: (context) => BMRScreen(),));
 
 
   })

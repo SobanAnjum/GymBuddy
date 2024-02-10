@@ -5,6 +5,7 @@ import 'package:my_trainer/Functions/writeProfile.dart';
 import 'package:my_trainer/components/datePicker.dart';
 import 'package:my_trainer/components/loginButton.dart';
 import 'package:my_trainer/components/textField.dart';
+import 'package:my_trainer/screens/bmr.dart';
 
   TextEditingController fName = TextEditingController();
     TextEditingController lName = TextEditingController();
@@ -133,33 +134,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                builder: (BuildContext context, StateSetter setState) {
                  return Padding(
                    padding: const EdgeInsets.only(left: 35,right: 35),
-                   child: Container(
-                     width: 340,
-                     height: 60,
-                     decoration: BoxDecoration(border:Border.all(color:Colors.grey, ), borderRadius: BorderRadius.circular(5)),
-                     child: Center(
-                       child: Padding(
-                         padding: const EdgeInsets.only(left: 0,right: 0),
-                         child: DropdownButton<String>(
+                   child: Center(
+                     child: Container(
+                       width: 300,
+                       height: 60,
+                       decoration: BoxDecoration(border:Border.all(color:Colors.grey, ), borderRadius: BorderRadius.circular(5)),
+                       child: Center(
+                         child: Padding(
+                           padding: const EdgeInsets.only(left: 0,right: 0),
+                           child: DropdownButton<String>(
+                                         
+                                         
+                                         underline: Container(),
+                                         alignment: Alignment.center,
+                                         style: TextStyle(),
                                        
-                                       isExpanded: true,
-                                       underline: Container(),
-                                       alignment: Alignment.center,
-                                       style: TextStyle(),
-                                     
-                                       
-                                       
-                                       value: gender,
-                                       items: const [
-                                         DropdownMenuItem(value: "Male", child: Text("Male")),
-                                         DropdownMenuItem(value: "Female", child: Text("Female")),
-                                         DropdownMenuItem(value: "Other", child: Text("Other")),
-                                       ],
-                                       onChanged: (String? value) {
-                                         setState(() {
-                                           gender = value ?? "Male"; // Set default value to "Male" if null
-                                         });
-                                       },
+                                         
+                                         
+                                         value: gender,
+                                         items: const [
+                                           DropdownMenuItem(value: "Male", child: Text("Male")),
+                                           DropdownMenuItem(value: "Female", child: Text("Female")),
+                                           DropdownMenuItem(value: "Other", child: Text("Other")),
+                                         ],
+                                         onChanged: (String? value) {
+                                           setState(() {
+                                             gender = value ?? "Male"; // Set default value to "Male" if null
+                                           });
+                                         },
+                           ),
                          ),
                        ),
                      ),
@@ -185,6 +188,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           }
           else{
             AddToDB(fName.text, lName.text, gender, height.text, weight.text, int.parse(day), int.parse(month), int.parse(year));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BMRScreen(),));
           }
 
 
