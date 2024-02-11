@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_trainer/Functions/docReferance.dart';
+import 'package:my_trainer/screens/homepage.dart';
 
 
 
@@ -46,10 +47,12 @@ catch(e){
   throw(e);
   print(e);
 }
-
+Future.delayed(Duration(seconds: 5),(){
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+});
 
     return  Scaffold(
-      backgroundColor: color(weight, height),
+      backgroundColor: color(weight, height,isLoading),
       body:isLoading?Center(
               child: CircularProgressIndicator(),
             ): Column(
@@ -89,7 +92,12 @@ height = height* 0.0254;
 
 }
 
-Color color(double weight,double height){
+Color color(double weight,double height,bool isLoading){
+  if(isLoading){
+    return Color.fromRGBO(0, 0, 0, 1);
+  }
+  else{
+
   if(bodyStatus(weight, height)=="Underweight"){
     return  Color.fromRGBO(255, 0, 0, 1);
   }
@@ -102,7 +110,7 @@ Color color(double weight,double height){
   else{
     return  Color.fromRGBO(255, 0, 0, 1);
   }
-}
+}}
 String weightOpinion(String bodyStatus){
   if(bodyStatus=="Underweight"){
     return  "Bro you gotta eat to stay alive";

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toastr/flutter_toastr.dart';
 import 'package:get/get.dart';
+import 'package:my_trainer/Functions/docReferance.dart';
 import 'package:my_trainer/Functions/emailvalidator.dart';
 import 'package:my_trainer/Functions/signinfirebase.dart';
 import 'package:my_trainer/Functions/textvalidator.dart';
@@ -54,6 +55,7 @@ class _SigninState extends State<SigninScreen> {
           const SizedBox(height: 20,),
            InkWell(
             onTap: (){
+
               Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
             },
             child: const Text("Don't have an Account? Click here to Register"),

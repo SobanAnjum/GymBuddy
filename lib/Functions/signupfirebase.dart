@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_toastr/flutter_toastr.dart';
 import 'package:my_trainer/Functions/usernameCheck.dart';
 import 'package:my_trainer/screens/homepage.dart';
+import 'package:my_trainer/screens/onBoardingScreen.dart';
 
 signupUser(String email,String password,String username,BuildContext currentcontext) async{
 
@@ -42,7 +43,7 @@ var  personalInfoDocument = userDocument.collection("PersonalInformation").doc("
     
     
     );
-Navigator.pushReplacement(currentcontext, MaterialPageRoute(builder: (context)=>const HomePage()));
+Navigator.pushReplacement(currentcontext, MaterialPageRoute(builder: (context)=>const OnBoardingScreen()));
   }
 
  on FirebaseAuthException catch (e) {
