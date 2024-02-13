@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_trainer/Functions/docReferance.dart';
 
 class MuscleCheck extends StatefulWidget {
   const MuscleCheck({super.key});
@@ -37,7 +38,9 @@ class _MuscleCheckState extends State<MuscleCheck> {
 
 return Scaffold(
         appBar: AppBar(
-          title: Text('Muscle Group Selection'),
+          title: Text('Muscle Group Selection',style: TextStyle(fontFamily: "Lemonmilk",fontSize: 15),),
+          centerTitle: true,
+          
         ),
        body:  Column(
       children: [
@@ -49,7 +52,7 @@ return Scaffold(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(top: 30,left: 13,),
                     child: Text(
                       "$day",
                       style: TextStyle(
@@ -96,7 +99,8 @@ return Scaffold(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              print(muscleMap);
+              userRef().collection('ExcerciseData').doc('Day').set(muscleMap);
+              Navigator.pop(context);
             },
             child: Text('Proceed'),
           ),
