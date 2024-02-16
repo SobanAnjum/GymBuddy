@@ -43,6 +43,7 @@ dependencies:
   toast_w: ^0.0.5
   flutter_toastr: ^1.0.3
   http: ^1.2.0
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,36 @@ flutter:
     - assets/images/Chest.png
     - assets/images/Base.png
     - assets/images/Legs.png
+    - assets/gifs/Back Cable Row.gif
+    - assets/gifs/Barbell Bench Press.gif
+    - assets/gifs/Barbell Bicep Curl.gif
+    - assets/gifs/Barbell Shrug.gif
+    - assets/gifs/Barbell Squat.gif
+    - assets/gifs/Barbell Wrist Twist.gif
+    - assets/gifs/Bicycle Kicks.gif
+    - assets/gifs/Cable Bicep Curl.gif
+    - assets/gifs/Cable Straight Arm Pulldown.gif
+    - assets/gifs/Cable Straight Back Seated Row.gif
+    - assets/gifs/Cable Tricep Pushdown.gif
+    - assets/gifs/Dumbell Curl.gif
+    - assets/gifs/Dumbell Lateral Raise.gif
+    - assets/gifs/Dumbell Row.gif
+    - assets/gifs/Hammer Curl.gif
+    - assets/gifs/Inclined Dumbell Press.gif
+    - assets/gifs/Lat Pulldown.gif
+    - assets/gifs/Leg Push.gif
+    - assets/gifs/Leg Raise.gif
+    - assets/gifs/Push up.gif
+    - assets/gifs/Rear Back Cable Pull.gif
+    - assets/gifs/Shoulder1.gif
+    - assets/gifs/Single Dumbell Curl.gif
+    - assets/gifs/Sit ups.gif
+    - assets/gifs/Skull Crusher.gif
+    - assets/gifs/Stringt Dumbell Press.gif
+    - assets/gifs/Tricep Dips.gif
+    - assets/gifs/Weight Raise.gif
+    - assets/gifs/Weight Reverse Wrist Curl.gif
+
 
 
 

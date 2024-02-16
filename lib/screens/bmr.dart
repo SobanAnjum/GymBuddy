@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_trainer/Functions/docReferance.dart';
 import 'package:my_trainer/screens/homepage.dart';
+import 'package:my_trainer/screens/musclecheck.dart';
 
 
 
@@ -20,12 +21,10 @@ class _BMR_ScreenState extends State<BMRScreen> {
    double height=0;
    var bmr;
    bool isLoading=true;
-
-
-  @override
-  Widget build(BuildContext context) {
-
-try{
+@override
+void initState() {
+  super.initState();
+  try{
 final snapshot = docSnapshot();
 snapshot.then((snapShot) {
 var data= snapShot.data() as Map<String, dynamic>;
@@ -44,12 +43,17 @@ setState(() {
 } ); 
 }
 catch(e){
-  throw(e);
   print(e);
 }
-Future.delayed(Duration(seconds: 5),(){
+Future.delayed(Duration(seconds: 3),(){
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
 });
+}
+
+  @override
+  Widget build(BuildContext context) {
+
+
 
     return  Scaffold(
       backgroundColor: color(weight, height,isLoading),

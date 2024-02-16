@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_trainer/Functions/userCheck.dart';
 import 'package:my_trainer/components/logoImage.dart';
+import 'package:my_trainer/screens/homepage.dart';
 import 'package:my_trainer/screens/signin.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,7 +10,15 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(milliseconds: 2000), () {
-      checkUser(context);
+      
+if(checkUser()!=null){
+
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage(),));
+}
+else{
+   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SigninScreen(),));
+}
+
     });
     return Scaffold(
       body: Column(
