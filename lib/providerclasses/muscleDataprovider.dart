@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:my_trainer/Functions/datGetter.dart';
 
 class MuscleData extends ChangeNotifier{
@@ -23,14 +24,17 @@ void handleCheckbox(String day, String muscle, bool isChecked){
     muscleMap[day]?.remove(muscle);
   }
   notifyListeners();
+  muscleToDB();
 }
 ////////////////////////////////////////////////////
 List<String> todayMuscles(){
   List <String>muscles= [];
-  muscles=muscleMap[getToday()]!;
+   muscles=muscleMap[getToday()]??[];
   return muscles;
 }
 ///////////////////////////////////////////////////
+///
+
 List<Map> excercises=[
 {
   'name':'Bench Press',
@@ -278,6 +282,7 @@ if(onChanged){
       value['selected']=true;
 }
 notifyListeners();
+excerciseToDB();
 }
 
 }
@@ -302,6 +307,7 @@ enabledProvider(){
     if(value['muscle']==todayMuscle[i]&&value['selected']==true){
       enabledMap.add(value);
       todayExcercises.add(value);
+      notifyListeners();
     }
   }
    }
@@ -313,6 +319,63 @@ return enabledMap;
 removeFromToday(String name){
   todayExcercises.removeWhere((element) => element['name']==name);
   notifyListeners();
+}
+////////////////////////////////////////////////
+excerciseToDB()async{
+  var excercisebox=Hive.box('Excercises');
+  for(var entry in excercises){
+    await excercisebox.put(entry['name'], entry);
+  }
+
+}
+////////////////////////////////////////////////////
+muscleToDB()async{
+  var daybox=Hive.box('Daymap');
+   for(var entry in muscleMap.keys){
+    await daybox.put(entry, muscleMap[entry]);
+  }
+notifyListeners();
+}
+////////////////////////////////////////////
+dbToExcercise()async{
+  excercises.clear();
+  var excercisebox=Hive.box('Excercises');
+for(var entry in excercisebox.keys){
+   excercises.add(await excercisebox.get(entry));
+
+}
+notifyListeners();
+}
+/////////////////////////////////////////
+dbToMuscle()async{
+  muscleMap.clear();
+  var musclebox=Hive.box('Daymap');
+  for(var entry in musclebox.keys){
+    muscleMap[entry]=await musclebox.get(entry);
+
+  }
+  notifyListeners();
+}
+///////////////////////////////////////////
+setupDB()async{
+  var excercisebox=Hive.box('Excercises');
+  var musclebox=Hive.box('Daymap');
+  if( excercisebox.isEmpty){
+     await excerciseToDB();
+  }
+  else{
+     await dbToExcercise();
+
+  }
+    if(musclebox.isEmpty){
+    await muscleToDB();
+  }
+  else{
+     await dbToMuscle();
+
+  }
+  notifyListeners();
+
 }
 
 }

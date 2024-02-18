@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:my_trainer/Functions/datGetter.dart';
 import 'package:my_trainer/Functions/docReferance.dart';
 import 'package:my_trainer/Functions/signOut.dart';
 import 'package:my_trainer/Functions/usernameCheck.dart';
+import 'package:my_trainer/components/loginButton.dart';
 import 'package:my_trainer/components/muscleImage.dart';
 import 'package:my_trainer/providerclasses/muscleDataprovider.dart';
 import 'package:my_trainer/screens/bmr.dart';
@@ -19,24 +22,63 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 @override
-
-class _HomePageState extends State<HomePage> {
   bool init=false;
+class _HomePageState extends State<HomePage> {
+
 
 
 
   @override
   void initState() {
     super.initState();
-    Future.delayed( Duration(seconds: 0), (){
+     final muscledata=Provider.of<MuscleData>(context,listen: false);
+      //muscledata.setupDB();
+      if(Hive.box('Daymap').isEmpty){
+        muscledata.muscleToDB();
+      }else{
+       muscledata.dbToMuscle();
+      }
+    
+      print(muscledata.muscleMap);
+       if(Hive.box('Excercises').isEmpty){
+        muscledata.excerciseToDB();
+      }else{
+       muscledata.dbToExcercise();
+      }
+  
+    Future.delayed( Duration(seconds: 0), ()async{
     if(init==false){
+      var daybox=Hive.box('lastOpened');
     final muscledata=Provider.of<MuscleData>(context,listen: false);
-    muscledata.enabledProvider();
-    init=true;
+    if(daybox.isEmpty){
+      daybox.put('lastRan',DateTime.now().day);
+      muscledata.enabledProvider();
+    }
+    else if(daybox.isNotEmpty&& daybox.get('lastRan')!=DateTime.now().day){
+      muscledata.enabledProvider();
+      daybox.put('lastRan',DateTime.now().day);
+    }
+    
+
+    print('entered the init state with init as $init');
+    setState(() {
+        init=true;
+        print('now init is $init');
+    });
+  
 
     }
-    });
+  
 
+     
+    
+      //print(Hive.box('Excercises').values);
+
+      // print(muscledata.muscleMap);
+      // print(muscledata.excercises);
+
+
+    });
 
 
   }
@@ -46,7 +88,7 @@ class _HomePageState extends State<HomePage> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
 
     return Consumer<MuscleData>(builder: (context, provider, child) => Scaffold(
       drawer:  Drawer(
@@ -74,6 +116,15 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ExcerciseSelectionScreen(),));
             },
+            ),
+            ListTile(title: const Text('Clear Database'),
+            leading: const Icon(Icons.money_sharp),
+            onTap: ()async{
+            var hivebox=Hive.box('Daymap');
+            await hivebox.clear();
+            final snackbar=SnackBar(content: Text("DB Cleared"));
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            },
             )
           ],
         ),
@@ -81,7 +132,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: const Text("Home"),centerTitle: true,
       toolbarHeight:70,
       actions:  [
-        IconButton(onPressed: (){ Signout(context);}, icon: const Icon(Icons.exit_to_app))
+        IconButton(onPressed: (){ 
+          Hive.box('Daymap').clear;
+          Hive.box('Excercises').clear;
+          Signout(context);}, icon: const Icon(Icons.exit_to_app))
       ],
       ),
       body: Column(
@@ -91,6 +145,31 @@ class _HomePageState extends State<HomePage> {
         Divider(thickness: 1, indent: 50, endIndent: 50,),
         Text("Today's Excercises",style: TextStyle(fontFamily: 'lemonmilk',fontSize: 30, color: Color.fromRGBO(255, 0, 0, 1)),),
         SizedBox(height: 10,),
+        if(provider.todayExcercises.isEmpty && provider.muscleMap[getToday()]?.isEmpty==true)
+        const Text("Today's a Rest Day go enjoy yourself")
+        else if(provider.todayExcercises.isEmpty&&provider.muscleMap[getToday()]!=[])
+        Expanded(
+          child: Column(
+            children: [
+               Text("You Have Finished all your Excercises"),
+               Expanded(
+                
+                 child: Align(
+                  alignment: Alignment.bottomCenter,
+                   child: Padding(
+                    
+                     padding: const EdgeInsets.only(bottom: 20),
+                     child: loginSignupBTN("Reset today's Excercise", (){
+                     
+                      provider.enabledProvider();
+                     }),
+                   ),
+                 ),
+               )
+            ],
+          ),
+        )
+,
          Expanded(
            child: ListView.builder(itemCount:provider.todayExcercises.length, itemBuilder: (context, index) {
             return Card(
